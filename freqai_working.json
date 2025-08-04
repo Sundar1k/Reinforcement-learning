@@ -1,0 +1,92 @@
+{
+  "max_open_trades": 5,
+  "stake_currency": "USDT",
+  "stake_amount": "unlimited",
+  "tradable_balance_ratio": 0.95,
+  "timeframe": "5m",
+  "dry_run": true,
+  "dry_run_wallet": 50000,
+  "cancel_open_orders_on_exit": true,
+  "exchange": {
+    "name": "binance",
+    "key": "",
+    "secret": "",
+    "ccxt_config": {},
+    "ccxt_async_config": {},
+    "pair_whitelist": [
+      "BTC/USDT",
+      "ETH/USDT",
+      "BNB/USDT",
+      "ADA/USDT",
+      "SOL/USDT"
+    ],
+    "pair_blacklist": []
+  },
+  "entry_pricing": {
+    "price_side": "same",
+    "use_order_book": true,
+    "order_book_top": 1
+  },
+  "exit_pricing": {
+    "price_side": "same",
+    "use_order_book": true,
+    "order_book_top": 1
+  },
+  "freqai": {
+    "enabled": true,
+    "identifier": "gpu_training_3month",
+    "startup_candles": 6000,
+    "train_period_days": 45,
+    "backtest_period_days": 14,
+    "purge_old_models": 3,
+    "save_backtest_models": true,
+    "write_metrics_to_disk": true,
+    "data_kitchen_thread_count": 4,
+    "model_training_parameters": {
+      "learning_rate": 0.0001,
+      "batch_size": 512,
+      "n_steps": 2048,
+      "gamma": 0.995,
+      "n_epochs": 15,
+      "device": "auto"
+    },
+    "rl_config": {
+      "model_type": "PPO",
+      "policy_type": "MlpPolicy",
+      "train_cycles": 50,
+      "max_trade_duration_candles": 480,
+      "model_save_type": "stable_baselines3",
+      "add_state_info": true,
+      "net_arch": [
+        256,
+        256
+      ],
+      "model_reward_parameters": {
+        "rr": 1.5,
+        "profit_aim": 0.02,
+        "win_reward_factor": 3
+      }
+    },
+    "feature_parameters": {
+      "include_timeframes": [
+        "5m",
+        "1h",
+        "4h"
+      ],
+      "label_period_candles": 24,
+      "include_shifted_candles": 3,
+      "principal_component_analysis": false,
+      "use_SVM_to_remove_outliers": true,
+      "indicator_periods_candles": [
+        10,
+        20,
+        50
+      ]
+    },
+    "data_split_parameters": {
+      "test_size": 0.2,
+      "shuffle": false,
+      "random_state": 42
+    }
+  }
+}

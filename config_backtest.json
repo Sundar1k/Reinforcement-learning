@@ -1,0 +1,108 @@
+{
+    "max_open_trades": 3,
+    "stake_currency": "USDT",
+    "stake_amount": 100,
+    "dry_run": true,
+    "timeframe": "5m",
+    "trading_mode": "futures",
+    "margin_mode": "isolated",
+    "unfilledtimeout": {
+        "entry": 10,
+        "exit": 10,
+        "exit_timeout_count": 0,
+        "unit": "minutes"
+    },
+    "entry_pricing": {
+        "price_side": "same",
+        "use_order_book": true,
+        "order_book_top": 1,
+        "price_last_balance": 0.0,
+        "check_depth_of_market": {
+            "enabled": false,
+            "bids_to_ask_delta": 1
+        }
+    },
+    "exit_pricing": {
+        "price_side": "same",
+        "use_order_book": true,
+        "order_book_top": 1
+    },
+    "exchange": {
+        "name": "binance",
+        "key": "",
+        "secret": "",
+        "pair_whitelist": [
+            "BTC/USDT",
+            "ETH/USDT", 
+            "ADA/USDT",
+            "SOL/USDT",
+            "DOT/USDT"
+        ]
+    },
+    "pairlists": [
+        {
+            "method": "StaticPairList"
+        }
+    ],
+    "freqai": {
+        "enabled": true,
+        "purge_old_models": 2,
+        "train_period_days": 90,
+        "backtest_period_days": 7,
+        "identifier": "rl_vast_experiment_8years",
+        "live_retrain_hours": 0,
+        "expiration_hours": 1,
+        "feature_parameters": {
+            "include_timeframes": ["5m", "15m", "1h", "4h"],
+            "include_corr_pairlist": ["ETH/USDT"],
+            "label_period_candles": 12,
+            "include_shifted_candles": 1,
+            "indicator_periods_candles": [10, 20, 50],
+            "DI_threshold": 0,
+            "weight_factor": 0,
+            "principal_component_analysis": false,
+            "use_SVM_to_remove_outliers": false,
+            "plot_feature_importances": 0,
+            "shuffle_after_split": false,
+            "buffer_train_data_candles": 0
+        },
+        "data_split_parameters": {
+            "test_size": 0.25,
+            "random_state": 1,
+            "shuffle": false
+        },
+        "model_training_parameters": {
+            "learning_rate": 0.0003,
+            "gamma": 0.99,
+            "verbose": 1,
+            "n_steps": 8192,
+            "batch_size": 1024,
+            "device": "cpu"
+        },
+        "rl_config": {
+            "device": "cpu",
+            "train_cycles": 200,
+            "add_state_info": false,
+            "max_trade_duration_candles": 500,
+            "max_training_drawdown_pct": 0.02,
+            "cpu_count": 8,
+            "model_type": "PPO",
+            "policy_type": "MlpPolicy",
+            "model_reward_parameters": {
+                "rr": 1.5,
+                "profit_aim": 0.025
+            },
+            "drop_ohlc_from_features": false,
+            "net_arch": [128, 128],
+            "randomize_starting_position": false,
+            "progress_bar": true
+        },
+        "write_metrics_to_disk": false,
+        "conv_width": 1,
+        "save_backtest_models": false,
+        "activate_tensorboard": true,
+        "wait_for_training_iteration_on_reload": true,
+        "continual_learning": false,
+        "keras": false
+    }
+}

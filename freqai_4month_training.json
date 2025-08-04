@@ -1,0 +1,108 @@
+﻿{
+  "max_open_trades": 3,
+  "stake_currency": "USDT",
+  "stake_amount": 100,
+  "tradable_balance_ratio": 0.99,
+  "fiat_display_currency": "USD",
+  "dry_run": true,
+  "dry_run_wallet": 10000,
+  "cancel_open_orders_on_exit": false,
+  "trading_mode": "spot",
+  "exchange": {
+    "name": "binance",
+    "key": "",
+    "secret": "",
+    "ccxt_config": {},
+    "ccxt_async_config": {},
+    "pair_whitelist": [
+      "BTC/USDT",
+      "ETH/USDT",
+      "ADA/USDT",
+      "SOL/USDT",
+      "BNB/USDT"
+    ],
+    "pair_blacklist": []
+  },
+  "pairlists": [
+    {
+      "method": "StaticPairList"
+    }
+  ],
+  "timeframe": "5m",
+  "stoploss": -0.1,
+  "minimal_roi": {
+    "60": 0.01,
+    "30": 0.02,
+    "0": 0.04
+  },
+  "order_types": {
+    "entry": "limit",
+    "exit": "limit",
+    "stoploss": "market",
+    "stoploss_on_exchange": false
+  },
+  "order_time_in_force": {
+    "entry": "GTC",
+    "exit": "GTC"
+  },
+  "freqai": {
+    "enabled": true,
+    "purge_old_models": 2,
+    "train_period_days": 120,
+    "backtest_period_days": 30,
+    "live_retrain_hours": 0,
+    "startup_candles": 50000,
+    "fit_live_predictions_candles": 200,
+    "follow_mode": false,
+    "continual_learning": false,
+    "write_metrics_to_disk": true,
+    "data_kitchen_thread_count": 4,
+    "activate_tensorboard": false,
+    "model_training_parameters": {
+      "device": "cpu"
+    },
+    "rl_config": {
+      "model_type": "PPO",
+      "policy_type": "MlpPolicy",
+      "model_kwargs": {
+        "device": "cpu",
+        "n_steps": 4096,
+        "batch_size": 128,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "n_epochs": 20,
+        "ent_coef": 0.01,
+        "learning_rate": 0.0001,
+        "clip_range": 0.2,
+        "policy_kwargs": {
+          "device": "cpu"
+        }
+      }
+    },
+    "feature_parameters": {
+      "include_timeframes": ["5m", "15m", "1h", "4h"],
+      "include_corr_pairlist": [
+        "ETH/USDT",
+        "BTC/USDT",
+        "BNB/USDT"
+      ],
+      "label_period_candles": 48,
+      "include_shifted_candles": 3,
+      "DI_threshold": 0.9,
+      "weight_factor": 0.9,
+      "principal_component_analysis": false,
+      "use_SVM_to_remove_outliers": true,
+      "svm_params": {
+        "shuffle": false,
+        "nu": 0.1
+      },
+      "indicator_max_period_candles": 40,
+      "indicator_periods_candles": [10, 20, 40]
+    },
+    "data_split_parameters": {
+      "test_size": 0.25,
+      "shuffle": false
+    },
+    "model_save_type": "joblib"
+  }
+}

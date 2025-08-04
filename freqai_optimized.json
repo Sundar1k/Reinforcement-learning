@@ -1,0 +1,114 @@
+﻿{
+  "max_open_trades": 5,
+  "stake_currency": "USDT",
+  "stake_amount": "unlimited",
+  "tradable_balance_ratio": 0.95,
+  "timeframe": "5m",
+  "dry_run": true,
+  "dry_run_wallet": 50000,
+  "cancel_open_orders_on_exit": true,
+  "exchange": {
+    "name": "binance",
+    "key": "",
+    "secret": "",
+    "ccxt_config": {},
+    "ccxt_async_config": {},
+    "pair_whitelist": [
+      "BTC/USDT",
+      "ETH/USDT",
+      "BNB/USDT",
+      "ADA/USDT",
+      "SOL/USDT"
+    ],
+    "pair_blacklist": []
+  },
+  "entry_pricing": {
+    "price_side": "same",
+    "use_order_book": true,
+    "order_book_top": 1
+  },
+  "exit_pricing": {
+    "price_side": "same",
+    "use_order_book": true,
+    "order_book_top": 1
+  },
+  "freqai": {
+    "enabled": true,
+    "identifier": "gpu_training_optimized",
+    "startup_candles": 4000,
+    "train_period_days": 30,
+    "backtest_period_days": 7,
+    "purge_old_models": 3,
+    "save_backtest_models": true,
+    "write_metrics_to_disk": true,
+    "data_kitchen_thread_count": 4,
+    "model_training_parameters": {
+      "learning_rate": 0.001,
+      "batch_size": 512,
+      "n_steps": 2048,
+      "gamma": 0.99,
+      "n_epochs": 30,
+      "device": "auto"
+    },
+    "rl_config": {
+      "model_type": "PPO",
+      "policy_type": "MlpPolicy",
+      "train_cycles": 200,
+      "max_trade_duration_candles": 120,
+      "model_save_type": "stable_baselines3",
+      "add_state_info": true,
+      "net_arch": [
+        512,
+        256,
+        128
+      ],
+      "model_reward_parameters": {
+        "rr": 2.0,
+        "profit_aim": 0.015,
+        "win_reward_factor": 10,
+        "punish_factor": 2
+      },
+      "randomize_starting_position": true
+    },
+    "feature_parameters": {
+      "include_timeframes": [
+        "5m",
+        "1h",
+        "4h"
+      ],
+      "include_corr_pairlist": [
+        "ETH/USDT",
+        "BNB/USDT"
+      ],
+      "label_period_candles": 12,
+      "include_shifted_candles": 5,
+      "principal_component_analysis": true,
+      "use_SVM_to_remove_outliers": false,
+      "indicator_periods_candles": [
+        5,
+        10,
+        20,
+        50
+      ],
+      "DI_threshold": 0.5,
+      "weight_factor": 0.1,
+      "plot_feature_importances": 0,
+      "shuffle_after_split": false,
+      "buffer_train_data_candles": 500
+    },
+    "data_split_parameters": {
+      "test_size": 0.15,
+      "shuffle": true,
+      "random_state": 42
+    }
+  },
+  "pairlists": [
+    {
+      "method": "StaticPairList"
+    }
+  ],
+  "unfilledtimeout": {
+    "entry": 10,
+    "exit": 30
+  }
+}
